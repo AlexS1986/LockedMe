@@ -17,12 +17,8 @@ public class Directory extends File {
 		return true;
 	}
 	
-	/**
-	 * TODO should be a deep copy
-	 * @return
-	 */
+
 	public List<File> listAscendingFiles() {
-		//files.sort((f1,f2) -> f1.getName().compareTo(f2.getName()));
 		return files.stream().sorted((f1,f2) -> f1.getName().compareTo(f2.getName())).collect(Collectors.toList());
 	}
 	
