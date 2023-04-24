@@ -116,10 +116,9 @@ public class Model implements IModel {
 			pathToThisFile.add(file.getName());
 			if(file.isDirectory()){
 				filesOut.addAll(searchFileInDirectory((Directory) file,fileName,pathToThisFile));
-			} else {
-				if(file.getName().equals(fileName)) {
-					filesOut.add(pathToThisFile);
-				}
+			}
+			if(file.getName().equals(fileName)) {
+				filesOut.add(pathToThisFile);
 			}
 		}
 		return filesOut;

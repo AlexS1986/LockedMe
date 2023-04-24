@@ -159,11 +159,9 @@ public class View implements IView {
 
 		@Override
 		protected String showOptions() {
-			return "Enter the relative path of the file compared to " + model.getRootDirectory().getName()  +"." + System.lineSeparator()
-					+ "The <path> is the relative path of the file compared to " + model.getRootDirectory().getName()
-					+ ". Confirm with Enter." + System.lineSeparator() + 
-					"Example: d1    (searches directory d1 in " + model.getRootDirectory().getName() + ")" + System.lineSeparator() +
-					"Example: d1/f1 (searches file f1 in " + model.getRootDirectory().getName() + "/d1 )" + System.lineSeparator();
+			return "Enter name of the file that you want to search for." + System.lineSeparator()
+					+ "Confirm with Enter." + System.lineSeparator() +
+					"Example: d1    (searches file or directory d1 in " + model.getRootDirectory().getName() + " and its subdirectories )" + System.lineSeparator();
 		}
 
 		@Override
