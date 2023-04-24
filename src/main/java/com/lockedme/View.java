@@ -2,6 +2,7 @@ package com.lockedme;
 
 import java.io.PrintStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class View implements IView {
 
@@ -170,9 +171,19 @@ public class View implements IView {
 			return "" + System.lineSeparator();
 		}
 		
-		protected String showSuccess() {
-			return "File found.";
+		protected String showSuccess(List<List<String>> pathesOfFoundFiles) {
+
+
+			String outMessage = "File found at:" + System.lineSeparator();
+			for(List<String> path : pathesOfFoundFiles) {
+				outMessage = outMessage +  printPath(path) + System.lineSeparator();
+			}
+			return outMessage;
 		};
+
+		private String printPath(final List<String> path) {
+			return path.stream().collect(Collectors.joining(IView.PATHSEPARATOR));
+		}
 
 		protected String showFailure() {
 			return "File could not be found.";
@@ -315,8 +326,8 @@ public class View implements IView {
 	}
 
 	@Override
-	public String showSearchScreenSuccess() {
-		return new SearchScreen().showSuccess();
+	public String showSearchScreenSuccess(List<List<String>> foundFiles) {
+		return new SearchScreen().showSuccess(foundFiles);
 	}
 
 	@Override

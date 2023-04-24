@@ -10,5 +10,5 @@ public interface IModel {
 	Directory getRootDirectory();
 	void setRootDirectory(Directory rootDirectory);
 	boolean addDirectoryToDirectory(String directoryName);
-	boolean searchFileInDirectory(String filename);
+	List<List<String>> searchFileInDirectory(String filename);
 }

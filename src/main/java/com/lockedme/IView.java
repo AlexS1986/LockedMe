@@ -1,6 +1,8 @@
 package com.lockedme;
 
 
+import java.util.List;
+
 public interface IView {
 	final String mainDirectoryName = "main directory";
 	final String COMMANDLIST = "LIST";
@@ -11,6 +13,8 @@ public interface IView {
 	final String PROGRAMNAME = "<<< LockedMe >>>";
 	final String AUTHORNAME = "Alexander Schlueter";
 	final String AUTHOREMAIL = "alexander.schlueter@gx.de";
+
+	final String PATHSEPARATOR = "/";
 	
 	String showWelcomeScreenFailure();
 	
@@ -34,7 +38,7 @@ public interface IView {
 	String showDeleteScreenSuccess();
 	String showDeleteScreenFailure();
 	
-	String showSearchScreenSuccess();
+	String showSearchScreenSuccess(List<List<String>> foundPaths);
 	String showSearchScreenFailure();
 	String showWelcomeScreen();
 	

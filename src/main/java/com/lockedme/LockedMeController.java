@@ -1,6 +1,7 @@
 package com.lockedme;
 
 import java.util.Scanner;
+import java.util.List;
 
 public class LockedMeController {
 	private Scanner scanner;
@@ -106,10 +107,11 @@ public class LockedMeController {
 			String command = scanner.nextLine().trim();
 			while (!command.equals(IView.COMMANDEXIT)) {
 				String output = null;
-				if(model.searchFileInDirectory(command)) {
-					output  = view.showSearchScreenSuccess();
-				} else {
+				List<List<String>> foundFiles = model.searchFileInDirectory(command);
+				if(foundFiles.isEmpty()) {
 					output = view.showSearchScreenFailure();
+				} else {
+					output  = view.showSearchScreenSuccess(foundFiles);
 				}
 				view.outputToUI(output);
 				command = scanner.nextLine().trim();

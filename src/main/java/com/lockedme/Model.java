@@ -1,9 +1,6 @@
 package com.lockedme;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 public class Model implements IModel {
@@ -107,14 +104,25 @@ public class Model implements IModel {
 	}
 
 	@Override
-	public boolean searchFileInDirectory(String filename) {
-		String[] path = filename.split(java.io.File.separator);
-		if(path.length == 1) {
-			return rootDirectory.listAscendingFiles().contains(new File(filename));
-		} else {
-			return findFile(rootDirectory, Arrays.copyOfRange(path, 0, path.length)).map( file -> true ).orElse(Boolean.FALSE);
+	public List<List<String>> searchFileInDirectory(String filename) {
+		ArrayList<String> pathToDirectoryToSearchIn = new ArrayList<String>();
+		return searchFileInDirectory(rootDirectory, filename, pathToDirectoryToSearchIn);
+	}
+
+	private List<List<String>> searchFileInDirectory(Directory directoryToSearchIn, String fileName, final List<String> pathToDirectoryToSearchIn){
+		List<List<String>> filesOut = new ArrayList<List<String>>();
+		for(File file : directoryToSearchIn.listAscendingFiles()) {
+			List<String> pathToThisFile = new ArrayList<>(List.copyOf(pathToDirectoryToSearchIn));
+			pathToThisFile.add(file.getName());
+			if(file.isDirectory()){
+				filesOut.addAll(searchFileInDirectory((Directory) file,fileName,pathToThisFile));
+			} else {
+				if(file.getName().equals(fileName)) {
+					filesOut.add(pathToThisFile);
+				}
+			}
 		}
-		
+		return filesOut;
 	}
 
 }
